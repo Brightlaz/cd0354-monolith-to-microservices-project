@@ -9,24 +9,14 @@ orbs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 jobs:
-  example-job:
+  run-build:
     docker:
       # replace with your preferred image
       - image: cimg/base:stable
     steps:
-      - docker/build:
-          docker-context: docker-compose -f docker-compose-build.yaml build --parallel 
-          attach-at: ' ' 
-          cache_from: ' ' 
-          dockerfile: Dockerfile 
-          extra_build_args: ' ' 
-          image: . 
-          no_output_timeout: '10m' 
-          path: . 
-          registry: docker.io 
-          step-name: Docker build 
+      - run: docker-compose -f docker-compose-build.yaml build --parallel 
 
 workflows:
   example-workflow:
     jobs:
-      - example-job
+      - run-build
