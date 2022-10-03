@@ -4,18 +4,29 @@ version: 2.1
 # Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
 # See: https://circleci.com/docs/2.0/orb-intro/
 orbs:
-  node: circleci/node@4.7
+  docker: circleci/docker@1.7.0
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+jobs:
+  example-job:
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
+    steps:
+      - docker/build:
+          docker-context: docker-compose -f docker-compose-build.yaml build --parallel 
+          attach-at: ' ' 
+          cache_from: ' ' 
+          dockerfile: Dockerfile 
+          extra_build_args: ' ' 
+          image: . 
+          no_output_timeout: '10m' 
+          path: . 
+          registry: docker.io 
+          step-name: Docker build 
+
 workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
+  example-workflow:
     jobs:
-      - node/test:
-          # This is the node version to use for the `cimg/node` tag
-          # Relevant tags can be found on the CircleCI Developer Hub
-          # https://circleci.com/developer/images/image/cimg/node
-          version: '16.10'
-          # If you are using yarn, change the line below from "npm" to "yarn"
-          pkg-manager: npm
+      - example-job
