@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: udagram-env
 data:
-  POSTGRES_HOST: database.coykvx8tzy6l.us-east-1.rds.amazonaws.com
+  POSTGRES_HOST: database.cue59d4tnzbi.us-east-1.rds.amazonaws.com
   POSTGRES_DB: postgres
   AWS_BUCKET: mybucket-123-dev
   AWS_REGION: us-east-1
