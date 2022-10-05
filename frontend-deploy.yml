@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: brightlazarus/udagram-frontend:v1
+          image: brightlazarus/udagram-frontend:v2
           ports:
             - containerPort: 80
